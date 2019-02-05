@@ -29,7 +29,7 @@ void printprocstks(int priority)
                  if (i == currpid)
                  {
                      asm("movl %esp, esp");
-                     kprintf("\tpointer: 0x  %08x\n", esp);
+                     kprintf("\tpointer: 0x %08x\n", esp);
                  }
                  else
                      kprintf("\tpointer: 0x %08x\n", proc->pesp);
