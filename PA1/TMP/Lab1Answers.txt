@@ -1,0 +1,28 @@
+1. Advantages and disadvantages of the three scheduling policies.
+
+(1) Default
+Advantages: Higher priority processes have more opportunities to run；
+            Since the logic and process is simple, this scheduler has high efficiency.
+Disadvantages: Starvation may happen. If there always exists a higher priority process, the process which has low priority never has a chance to run.
+
+(2) Exponential Distribution Scheduler
+Advantages: No starvation, all the processes have a chance to run;
+            The scheduling result distribution can be controlled by changing 'lambda'
+Disadvantages: Can not make sure high priority processes get more chances to run. Therefore it's "fair" but not "efficiency".
+
+(3) Linux-like Scheduler
+Advantages: No starvation, all the processes have a chance to run;
+            Higher "priority" processes have more chance to run and will be handled earlier.
+Disadvantages: Due to the more complex calculation logic, the efficiency is the lowest of the three.
+               If a new process created in the middle of an epoch and there already exists a lot of process in the current epoch, then the new process has to wait for a long time before it can be scheduled, even if its priority is high.
+
+2. The way three scheduler affects the NULL process.
+
+(1) Default
+The NULL process will be scheduled if the ready list is empty.
+
+(2) Exponential Distribution Scheduler
+Same as Default scheduler, only schedule the NULL process if there is no process READY.
+
+(3) Linux-like scheduler
+Actually the same. Only if no process is ready, NULL process will be scheduled. This is because if there exist processes in ready list but all of them have used up their quantum, a new epoch will start and those process will assigned a quantum again. Therefore, if the ready queue is not empty, no matter those processes used up their quantum or not, NULL process will not be scheduled.
