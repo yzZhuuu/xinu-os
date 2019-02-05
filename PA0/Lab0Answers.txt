@@ -1,0 +1,51 @@
+1. Assuming the XINU text begins at address 0x0, draw a rough diagram of XINU's memory layout with addresses derived from your experimental measurements. Include the information you uncovered from running your version of printsegaddress() and printprocstks().
+   
+ ________
+|        |
+|  free  |
+|        |
+|        |
+|--------| base [0x00ffeff8]
+|        |
+|  main  | stack pointer[0x00ffefa0]
+|  stack | stack limit  [0x00ffdffc]
+|        |
+|--------| 
+|  heap  |
+|--------| ebss [0x00024198]
+|  bss   |
+|--------| edata[0x0001e53d]
+|  data  | 
+|--------| etext[0x0001951d]
+|  text  | 
+|________| begin[0x00000000]
+
+
+2. What is the difference in stack top address before and after calling printtos()? Draw a diagram to illustrate what are the contents of the items pushed into the stack between these two time points.
+
+ ________
+|last    |
+|fuction |
+|stuff   | [0x00ffeff4] top of stack just before system call
+|        |
+|--------|
+| Return | 
+| Address| [0x00ffeff0] top of stack just after system call
+|--------| 
+|  ebp   | [0x00ffefc8]
+|--------| 
+|... ... |
+|--------|
+|element | [0x00ffefac]
+|--------|
+|element | [0x00ffefa8]
+|--------|
+|element | [0x00ffefa4]
+|--------|
+|element | [0x00ffefa0] esp current bottom of stack
+|________|
+
+
+3. In a stack frame, local variables are stored below the top of the stack. In task 3, does your result show all the local variables declared in your printtos function? If not, can you explain that? (hint: try to disable the compiler optimization by specifing -O0 in your Makefile)
+
+No. Sorry, unable to find the reason for me before deadline. I'll keep searching for this issue.
